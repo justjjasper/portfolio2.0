@@ -11,6 +11,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        proxima: ['Proxima Nova Light', 'Helvetica', 'Arial', 'sans-serif' ]
+      }
     },
   },
   plugins: [],
