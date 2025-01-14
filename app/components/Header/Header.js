@@ -1,16 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { linkedInIcon, githubIcon, igIcon } from '../../assets/svg/icons';
+import Hamburger from 'hamburger-react';
 import tw from 'tailwind-styled-components';
 import clsx from 'clsx';
 
 //! ---> STYLES <---
 const Container = tw.header`
   flex items-center justify-center
-  xl:px-0 px-4
-  h-[97px]
+  lg:px-36 md:px-20 px-5
+  md:h-[97px] h-[65px]
   bg-black
   font-proxima
 `;
@@ -21,7 +23,8 @@ const NavContainer = tw.nav`
 `;
 
 const NavItemContainer = tw.ul`
-  flex justify-evenly gap-8
+  hidden justify-evenly gap-8
+  md:flex
 `;
 
 //! ---> SEEDED DATA <---
@@ -52,6 +55,8 @@ const socialItems = [
 //! ---> COMPONENT <---
 export default function Header() {
   const pathname = usePathname();
+
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Container>
@@ -89,7 +94,7 @@ export default function Header() {
 
         {/* Socials */}
         <nav>
-          <NavItemContainer className='flex items-center justify-evenly'>
+          <NavItemContainer>
             {socialItems.map((item, i) => {
               return (
                 <li key={i}>
@@ -106,6 +111,18 @@ export default function Header() {
             })}
           </NavItemContainer>
         </nav>
+
+        {/* Mobile Menu */}
+        <div
+          className='group'
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Hamburger
+            color={isHovered ? 'gray' : 'white'}
+            transitionDuration={0.3}
+          />
+        </div>
       </NavContainer>
     </Container>
   );
