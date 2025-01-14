@@ -11,10 +11,9 @@ import clsx from 'clsx';
 //! ---> STYLES <---
 const Container = tw.header`
   flex items-center justify-center
-  lg:px-36 md:px-20 px-5
-  md:h-[97px] h-[65px]
-  bg-black
-  font-proxima
+  px-5 sm:px-16 lg:px-36
+  h-[65px] md:h-[97px]
+  bg-black font-proxima
 `;
 
 const NavContainer = tw.nav`
@@ -27,11 +26,18 @@ const NavItemContainer = tw.ul`
   md:flex
 `;
 
+const MobileMenu = tw.div`
+  w-full bg-black z-50
+  md:hidden fixed top-[65px] right-0 h-[calc(100vh-65px)]
+  transform transition-transform duration-500 ease-in-out
+`;
+
 //! ---> SEEDED DATA <---
 const menuItems = [
   { name: 'about', url: '/about' },
   { name: 'projects', url: '/project' },
   { name: 'contact', url: '/contact' },
+  { name: 'home', url: '/', mobileOnly: true },
 ];
 
 const socialItems = [
@@ -56,6 +62,7 @@ const socialItems = [
 export default function Header() {
   const pathname = usePathname();
 
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -74,21 +81,21 @@ export default function Header() {
         {/* Nav Items */}
         <nav>
           <NavItemContainer>
-            {menuItems.map((item, i) => {
-              return (
+            {menuItems
+              .filter((item) => !item.mobileOnly) // Exclude mobile-only items
+              .map((item, i) => (
                 <li key={i}>
                   <Link
                     href={item.url}
                     className={clsx(
                       pathname === item.url ? 'text-gray-600' : 'text-white',
-                      'font-proxima text-lg hover:text-gray-600'
+                      'font-proxima text-xl hover:text-gray-600'
                     )}
                   >
                     {item.name}
                   </Link>
                 </li>
-              );
-            })}
+              ))}
           </NavItemContainer>
         </nav>
 
@@ -102,7 +109,7 @@ export default function Header() {
                     href={item.url}
                     title={item.title}
                     target='_blank'
-                    className='inline hover:text-gray-600 text-white'
+                    className='hover:text-gray-600 text-white'
                   >
                     {item.icon('w-8 h-8', 'currentColor')}
                   </Link>
@@ -112,17 +119,54 @@ export default function Header() {
           </NavItemContainer>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Hamburger */}
         <div
-          className='group'
+          className='block md:hidden'
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <Hamburger
             color={isHovered ? 'gray' : 'white'}
             transitionDuration={0.3}
+            toggled={toggleMenu}
+            toggle={setToggleMenu}
           />
         </div>
+
+        {/* Mobile Menu Content */}
+        <MobileMenu
+          className={clsx(
+            toggleMenu ? 'translate-x-0' : 'translate-x-full',
+            'w-full'
+          )}
+        >
+          <ul className='flex flex-col items-center text-white mt-20 gap-8'>
+            {menuItems.map((item, i) => (
+              <li key={i} className='w-full'>
+                <Link
+                  href={item.url}
+                  className='block text-center text-3xl hover:text-gray-600 font-proxima pb-4 border-b-[0.5px] border-white'
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className='flex items-center justify-center gap-8 py-8'>
+            {socialItems.map((item, i) => (
+              <li key={i}>
+                <Link
+                  href={item.url}
+                  title={item.title}
+                  target='_blank'
+                  className='hover:text-gray-600 text-white'
+                >
+                  {item.icon('w-10 h-10', 'currentColor')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </MobileMenu>
       </NavContainer>
     </Container>
   );
