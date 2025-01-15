@@ -13,6 +13,10 @@ export default {
       },
       fontFamily: {
         proxima: ['Proxima Nova Light', 'Helvetica', 'Arial', 'sans-serif' ]
+      },
+      screens: {
+        'xsm': '560px',
+        //=> @media (min-width: 560px) aka smallest browser screen
       }
     },
   },

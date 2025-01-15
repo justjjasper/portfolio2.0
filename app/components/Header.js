@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { linkedInIcon, githubIcon, igIcon } from '../../assets/svg/icons';
 import Hamburger from 'hamburger-react';
 import tw from 'tailwind-styled-components';
 import clsx from 'clsx';
+
+import { linkedInIcon, githubIcon, igIcon } from '../assets/svg/icons';
 
 //! ---> STYLES <---
 const Container = tw.header`
@@ -34,10 +35,15 @@ const MobileMenu = tw.div`
 
 //! ---> SEEDED DATA <---
 const menuItems = [
-  { name: 'about', url: '/about' },
-  { name: 'projects', url: '/project' },
-  { name: 'contact', url: '/contact' },
-  { name: 'home', url: '/', mobileOnly: true },
+  { name: 'about', url: '/about', ariaLabel: 'Visit the About Page' },
+  { name: 'projects', url: '/project', ariaLabel: 'Visit the Projects Page' },
+  { name: 'contact', url: '/contact', ariaLabel: 'Visit the Contact Page' },
+  {
+    name: 'home',
+    url: '/',
+    ariaLabel: 'Visit the Home Page',
+    mobileOnly: true,
+  },
 ];
 
 const socialItems = [
@@ -45,16 +51,19 @@ const socialItems = [
     url: 'https://www.linkedin.com/in/jasper-bucad',
     title: 'Connect with me on Linkedin',
     icon: linkedInIcon,
+    ariaLabel: `Jasper Bucad's LinkedIn`,
   },
   {
     url: 'https://github.com/justjjasper',
     title: 'View my code on Github',
     icon: githubIcon,
+    ariaLabel: `Jasper Bucad's Github Profile`,
   },
   {
     url: 'https://www.instagram.com/onlywithjasper/',
     title: 'Follow me on Instagram',
     icon: igIcon,
+    ariaLabel: `Jasper Bucad's Instagram`,
   },
 ];
 
@@ -72,6 +81,7 @@ export default function Header() {
         <Link
           className='flex items-center justify-center rounded-full bg-white md:w-14 md:h-14 w-11 h-11 hover:bg-gray-600'
           href='/'
+          aria-label='Go to Home Page'
         >
           <span className='text-black text-2xl md:text-3xl font-medium'>
             JB
@@ -87,6 +97,7 @@ export default function Header() {
                 <li key={i}>
                   <Link
                     href={item.url}
+                    aria-label={item.ariaLabel}
                     className={clsx(
                       pathname === item.url ? 'text-gray-600' : 'text-white',
                       'font-proxima text-xl hover:text-gray-600'
@@ -108,6 +119,7 @@ export default function Header() {
                   <Link
                     href={item.url}
                     title={item.title}
+                    aria-label={item.ariaLabel}
                     target='_blank'
                     className='hover:text-gray-600 text-white'
                   >
@@ -120,18 +132,22 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu Hamburger */}
-        <div
-          className='block md:hidden'
+        <button
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setToggleMenu(!toggleMenu)}
+          aria-expanded={toggleMenu}
+          aria-label={toggleMenu ? 'Close menu' : 'Open menu'}
+          className='block md:hidden'
         >
           <Hamburger
             color={isHovered ? 'gray' : 'white'}
             transitionDuration={0.3}
             toggled={toggleMenu}
             toggle={setToggleMenu}
+            aria-label='Mobile Menu'
           />
-        </div>
+        </button>
 
         {/* Mobile Menu Content */}
         <MobileMenu
@@ -145,6 +161,7 @@ export default function Header() {
               <li key={i} className='w-full'>
                 <Link
                   href={item.url}
+                  aria-label={item.ariaLabel}
                   className='block text-center text-3xl hover:text-gray-600 font-proxima pb-4 border-b-[0.5px] border-white'
                 >
                   {item.name}
@@ -158,6 +175,7 @@ export default function Header() {
                 <Link
                   href={item.url}
                   title={item.title}
+                  aria-label={item.ariaLabel}
                   target='_blank'
                   className='hover:text-gray-600 text-white'
                 >
