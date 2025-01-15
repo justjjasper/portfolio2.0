@@ -22,6 +22,18 @@ const NavContainer = tw.nav`
   w-full max-w-[1200px]
 `;
 
+const Logo = tw(Link)`
+  flex items-center justify-center
+  rounded-full bg-white hover:bg-gray-600
+  md:w-14 md:h-14 w-11 h-11
+`;
+
+const MobileMenuItem = tw(Link)`
+  block border-b-[0.5px] border-white
+  text-center text-3xl hover:text-gray-600 font-proxima
+  pb-4
+`;
+
 const NavItemContainer = tw.ul`
   hidden justify-evenly gap-8
   md:flex
@@ -78,15 +90,11 @@ export default function Header() {
     <Container>
       <NavContainer>
         {/* Logo */}
-        <Link
-          className='flex items-center justify-center rounded-full bg-white md:w-14 md:h-14 w-11 h-11 hover:bg-gray-600'
-          href='/'
-          aria-label='Go to Home Page'
-        >
+        <Logo href='/' aria-label='Go to Home Page'>
           <span className='text-black text-2xl md:text-3xl font-medium'>
             JB
           </span>
-        </Link>
+        </Logo>
 
         {/* Nav Items */}
         <nav>
@@ -131,7 +139,7 @@ export default function Header() {
           </NavItemContainer>
         </nav>
 
-        {/* Mobile Menu Hamburger */}
+        {/* Mobile Menu Button */}
         <button
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -159,13 +167,9 @@ export default function Header() {
           <ul className='flex flex-col items-center text-white mt-20 gap-8'>
             {menuItems.map((item, i) => (
               <li key={i} className='w-full'>
-                <Link
-                  href={item.url}
-                  aria-label={item.ariaLabel}
-                  className='block text-center text-3xl hover:text-gray-600 font-proxima pb-4 border-b-[0.5px] border-white'
-                >
+                <MobileMenuItem href={item.url} aria-label={item.ariaLabel}>
                   {item.name}
-                </Link>
+                </MobileMenuItem>
               </li>
             ))}
           </ul>

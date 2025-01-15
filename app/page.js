@@ -1,5 +1,7 @@
+'use client'
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
+import { motion } from 'framer-motion';
 
 //! ---> STYLES <---
 const Container = tw.div`
@@ -15,21 +17,21 @@ const TextContainer = tw.div`
   flex flex-col gap-8
 `;
 
-const PortraitContainer = tw.div`
+const PortraitContainer = tw(motion.div)`
   relative flex
   mx-auto lg:mx-0 lg:mt-0 mt-10
 `;
 
-const H1 = tw.h1`
+const H1 = tw(motion.h1)`
   text-6xl xsm:text-7xl lg:text-8xl font-bold
 `;
 
-const H3 = tw.h3`
+const H3 = tw(motion.h3)`
   text-2xl text-[#7B7B7B] font-extralight
   lg:w-[25ch]
 `;
 
-const P = tw.p`
+const P = tw(motion.p)`
   text-lg font-light
   lg:w-[43ch]
 `;
@@ -45,9 +47,25 @@ export default function Home() {
     <Container>
       {/* Text Container */}
       <TextContainer>
-        <H1>jasper bucad.</H1>
-        <H3>I'm a Web Developer based in Los Angeles, California.</H3>
-        <P>
+        <H1
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          jasper bucad.
+        </H1>
+        <H3
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+        >
+          I'm a Web Developer based in Los Angeles, California.
+        </H3>
+        <P
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.8, ease: 'easeOut' }}
+        >
           I'm a tech enthusiast with a keen eye for design and create intricate
           websites. When I'm not coding during the week, I'm always on the move
           as a weekend warrior.
@@ -55,7 +73,11 @@ export default function Home() {
       </TextContainer>
 
       {/* Portrait Container */}
-      <PortraitContainer>
+      <PortraitContainer
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.8, ease: 'easeOut' }}
+      >
         <Image
           src='/images/moi.jpeg'
           alt='Picture of moi'
