@@ -7,12 +7,21 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        'bg-scroll': 'bg-scroll 30s linear infinite',
+      },
+      keyframes: {
+        'bg-scroll': {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '0 100%' },
+        },
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        proxima: ['Proxima Nova Light', 'Helvetica', 'Arial', 'sans-serif' ]
+        proxima: ['Proxima Nova Light', 'Helvetica', 'Arial', 'sans-serif']
       },
       screens: {
         'xsm': '560px',

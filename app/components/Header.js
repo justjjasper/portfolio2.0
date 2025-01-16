@@ -8,18 +8,18 @@ import tw from 'tailwind-styled-components';
 import clsx from 'clsx';
 
 import { linkedInIcon, githubIcon, igIcon } from '../assets/svg/icons';
+import { Wrapper } from '../style/base';
 
 //! ---> STYLES <---
-const Container = tw.header`
+const Container = tw(Wrapper)`
   flex items-center justify-center
-  px-5 sm:px-16 lg:px-36
   h-[65px] md:h-[97px]
   bg-black font-proxima
 `;
 
 const NavContainer = tw.nav`
   flex items-center justify-between
-  w-full max-w-[1200px]
+  w-full
 `;
 
 const Logo = tw(Link)`
