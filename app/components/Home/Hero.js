@@ -1,20 +1,37 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { motion } from 'framer-motion';
 import { Wrapper } from '../../style/base';
 
-const Container = tw(Wrapper)`
-  border-b-4 border-black rounded-b-[60px] bg-white shadow-2xl relative z-0
+const Container = tw.div`
+  relative z-0
   flex flex-col
   lg:flex-row lg:justify-between lg:items-center
   py-16
+  pr-5 sm:pr-16 lg:pr-36
 `;
 
 const TextContainer = tw.div`
+  relative z-0
+`;
+
+const ContentContainer = tw.div`
+  relative z-10
+  bg-white
+  border-4 border-black
   font-proxima text-[#333333]
   flex flex-col gap-8
+  pt-16 pl-36
+  h-[27.5rem]
+`;
+
+const ContentShadow = tw.div`
+  absolute w-full inset-0
+  bg-black
+  z-0 left-3 top-2
+  h-[27.5rem]
 `;
 
 const PortraitContainer = tw(motion.div)`
@@ -47,20 +64,34 @@ export default function Hero() {
     <Container>
       {/* Text Container */}
       <TextContainer>
-        <H1
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+        <ContentContainer
+          style={{
+            clipPath:
+              'polygon(72px 0%, calc(100% - 72px) 0%, 100% 0%, 100% calc(100% - 72px), calc(100% - 72px) 100%, 72px 100%, 0px 100%, 0px 0%)',
+          }}
         >
-          jasper bucad.
-        </H1>
-        <H3
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-        >
-          I'm a Web Developer based out of sunny Los Angeles, California.
-        </H3>
+          <span className='absolute block origin-bottom-right -rotate-45 bg-neutral-950 object-cover border-2 border-black right-[-4px] top-[360px] w-[100px] h-[2px]'></span>
+          <H1
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            jasper bucad.
+          </H1>
+          <H3
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+          >
+            I'm a Web Developer based out of sunny Los Angeles, California.
+          </H3>
+        </ContentContainer>
+        <ContentShadow
+          style={{
+            clipPath:
+              'polygon(72px 0%, calc(100% - 72px) 0%, 100% 0%, 100% calc(100% - 72px), calc(100% - 72px) 100%, 72px 100%, 0px 100%, 0px 0%)',
+          }}
+        ></ContentShadow>
         {/* <P
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -71,7 +102,6 @@ export default function Hero() {
         on the move as a weekend warrior.
       </P> */}
       </TextContainer>
-
       {/* Portrait Container */}
       <PortraitContainer
         initial={{ x: 100, opacity: 0 }}
