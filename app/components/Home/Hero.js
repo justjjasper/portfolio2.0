@@ -5,6 +5,7 @@ import tw from 'tailwind-styled-components';
 import { motion } from 'framer-motion';
 import { Wrapper } from '../../style/base';
 
+//! To do- adjust the responsiveness of the hero (from lg to xl)
 const Container = tw.div`
   relative z-0
   flex flex-col
@@ -23,15 +24,16 @@ const ContentContainer = tw.div`
   border-4 border-black
   font-proxima text-[#333333]
   flex flex-col gap-8
-  pt-16 pl-36
-  h-[27.5rem]
+  pt-16 px-5
+  sm:px-16 lg:pl-36
+  h-[20rem] lg:h-[27.5rem]
 `;
 
 const ContentShadow = tw.div`
   absolute w-full inset-0
   bg-black
   z-0 left-3 top-2
-  h-[27.5rem]
+  h-[20rem] lg:h-[27.5rem]
 `;
 
 const PortraitContainer = tw(motion.div)`
@@ -40,7 +42,7 @@ const PortraitContainer = tw(motion.div)`
 `;
 
 const H1 = tw(motion.h1)`
-  text-6xl xsm:text-7xl lg:text-8xl font-bold
+  text-5xl xsm:text-7xl lg:text-8xl font-bold
 `;
 
 const H3 = tw(motion.h3)`
