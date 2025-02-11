@@ -20,7 +20,7 @@ const TextContainer = tw.div`
 
 const ContentContainer = tw.div`
   relative z-10
-  bg-white
+  bg-custom-white
   border-4 border-black
   font-proxima text-[#333333]
   flex flex-col gap-8

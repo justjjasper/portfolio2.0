@@ -6,7 +6,7 @@ import { Wrapper } from '../../style/base';
 const Container = tw.div`
   mt-10
   py-16
-  border-4 border-black rounded-[60px] bg-white shadow-2xl
+bg-white shadow-2xl
   h-[500px]
 `;
 
