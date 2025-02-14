@@ -68,7 +68,7 @@ export default function LatestProjects() {
       <InnerContainer>
         <H1 style={{ background }}>SOME OF MY LATEST WORKS</H1>
         <ProjectsContainer>
-          { projects.map((project => (
+          { projects.slice(0, 3).map((project => (
             <SingleProjectLink key={project.id} href={project.url} className='text-white' target='_blank'>
               <ProjectImage>
                   {/* ! Roughly 870px x 560px for Project Screenshots */}
