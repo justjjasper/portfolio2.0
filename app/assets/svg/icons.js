@@ -44,3 +44,5 @@ export const igIcon = (className, fill) => {
     </svg>
   );
 };
+
+export const rightArrowSVG = <svg stroke="currentColor" fill="none" strokeWidth="1.25" viewBox="0 0 24 24" aria-hidden="true" height="40" width="40" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg>

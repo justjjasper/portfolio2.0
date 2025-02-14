@@ -1,11 +1,9 @@
 'use client';
-
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { motion } from 'framer-motion';
 import { Wrapper } from '../../style/base';
 
-//! To do- adjust the responsiveness of the hero (from lg to xl)
 const Container = tw.div`
   relative z-0
   flex flex-col

@@ -10,6 +10,9 @@ export default {
       animation: {
         'bg-scroll': 'bg-scroll 30s linear infinite',
       },
+      boxShadow: {
+        'project-shadows': '9px 9px 0px 0px #808080',
+      },
       keyframes: {
         'bg-scroll': {
           '0%': { backgroundPosition: '0 0' },
