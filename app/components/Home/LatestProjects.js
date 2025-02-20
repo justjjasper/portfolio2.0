@@ -9,7 +9,8 @@ import { rightArrowSVG } from '../../assets/svg/icons';
 
 //! ---> STYLES <---
 const Container = tw(motion.div)`
-  mt-10 py-16 bg-white
+  mt-0 py-16 bg-white
+  lg:mt-10
   px-5 sm:px-16 lg:px-36
   shadow-2xl
 `;
@@ -23,14 +24,16 @@ const InnerContainer = tw.div`
 const H1 = tw(motion.h1)`
   flex justify-center
   absolute top-[-1rem]
-  text-3xl text-custom-white
-  w-[40%]
+  text-custom-white
+  text-lg sm:text-lg xl:text-2xl
+  w-[60%] lg:w-[40%]
 `;
 
 const ProjectsContainer = tw.div`
-  flex justify-between w-full
+  flex flex-col items-center gap-8 justify-between w-full
+  lg:flex-row
   py-10
-`
+`;
 
 const SingleProjectLink = tw(Link)`
   w-[22.5rem] h-[21rem]
@@ -39,18 +42,18 @@ const SingleProjectLink = tw(Link)`
   transition-shadow duration-300 ease-in-out
   hover:shadow-[6px_6px_0px_0px_#808080]
   border-[3px] border-black
-`
+`;
 
 const ProjectImage = tw.div`
   flex
   h-[15rem]
   p-[1.25rem]
-`
+`;
 const ProjectContent = tw.div`
   flex justify-between
   border-t-[3px] border-black text-black
   p-[1em]
-`
+`;
 
 //! ---> COMPONENT <---
 export default function LatestProjects() {
@@ -59,7 +62,7 @@ export default function LatestProjects() {
   // Interpolating colors based on scroll progress
   const background = useTransform(
     scrollYProgress,
-    [0, 0.3, 0.8, 1],  // Adjusted for smoother, more noticeable transition
+    [0, 0.3, 0.8, 1], // Adjusted for smoother, more noticeable transition
     ['#1E1E1E', '#141414', '#0A0A0A', '#000000'] // More distinct black shades
   );
 
@@ -68,10 +71,17 @@ export default function LatestProjects() {
       <InnerContainer>
         <H1 style={{ background }}>SOME OF MY LATEST WORKS</H1>
         <ProjectsContainer>
-          { projects.slice(0, 3).map((project => (
-            <SingleProjectLink key={project.id} href={project.url} className='text-white' target='_blank'>
+          {projects.slice(0, 3).map((project, i) => (
+            <SingleProjectLink
+              key={project.id}
+              href={project.url}
+              target='_blank'
+              className={`text-white ${
+                i === 2 ? 'block lg:hidden xl:block' : ''
+              }`}
+            >
               <ProjectImage>
-                  {/* ! Roughly 870px x 560px for Project Screenshots */}
+                {/* ! Roughly 870px x 560px for Project Screenshots */}
                 <Image
                   src={project.img}
                   alt={project.name}
@@ -85,12 +95,10 @@ export default function LatestProjects() {
                   <h2 className='text-xl font-bold'>{project.name}</h2>
                   <p>{project.subTitle}</p>
                 </div>
-                <p>
-                  { rightArrowSVG }
-                </p>
+                <p>{rightArrowSVG}</p>
               </ProjectContent>
             </SingleProjectLink>
-          )))}
+          ))}
         </ProjectsContainer>
       </InnerContainer>
     </Container>
